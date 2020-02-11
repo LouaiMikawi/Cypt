@@ -33,43 +33,45 @@
 //     })
 //     }
     
+$(document).ready(function() {
+    var e = $('.card-group');
+    for (var i = 0; i < 5; i++) {
+      e.clone().insertAfter(e);
+    }
+});
 
 
 
-
-function moreInfo(id) { 
+function moreInfo(id){  
     
-      debugger;
+    //   debugger;
 
-$.ajax({
-type:'GET',
-url:"https://api.coingecko.com/api/v3/coins",
-        dataType: "json",
-        success: function(data){
-                 $.each(data,function(i,data){
+
+
+// $.ajax({
+// type:'GET',
+// url:"https://api.coingecko.com/api/v3/coins",
+//         dataType: "json",
+//         success: function(data){
+//                  $.each(data,function(i,data){
 //  $data.append('<li> name: '+id+'image is :'+Image.thumb+'</li>');
 
-             })
-            },
-headers:{
-"Authorization":"Bearer fngfmgngmfgn"
-}
+//              })
+//             },
+// // headers:{
+// "Authorization":"Bearer fngfmgngmfgn"
+// }
 
 
-}).done(function(resp){
+// }).
+// done(function(resp){
 
+// // var summary_obj=data_obj.summary;
 
-var resp_str=JSON.stringify(resp);
-$('#myPopup').append(resp_str);
-var meta_obj=resp.meta;
-
-var data_obj=resp.data;
-// var summary_obj=data_obj.summary;
-
-// var templates_obj=data_obj.templates;
-var formatted_html="Coin name "+data_obj.data-+"</br>";
-$("#myPopup").append(formatted_html);
-})
+// // var templates_obj=data_obj.templates;
+// var formatted_html="Coin name "+data_obj+"</br>";
+// $("#myPopup").append(formatted_html);
+// })
 
 // }
 
@@ -99,15 +101,49 @@ $("#myPopup").append(formatted_html);
     //     }
     // }) 
         //   debugger;
-    var popup = document.getElementById("myPopup");
-    
-    popup.classList.toggle("show");
 
-}
+    var myInit={method:'GET',
+                headers:{
+                    'Content-Type':'https://api.coingecko.com/api/v3/coins'
+                },
+                mode:'cors',
+                cache:'default'};
+
+
+
+    // };
+let myRequest =new Request ("https://api.coingecko.com/api/v3/coins",myInit);
+fetch(myRequest)
+.then(function(resp){
+
+    return resp.json();
+})
+
+.then(function(data){
+    debugger;
+    for(let i=0;i<100;i++){
+    console.log(data[i].name);
+
+    var formatted_html=`<div id=Coin_name>"Coin name "${data[0].name}"</br>"</div>
+    
+    <span class="popuptext" id="myPopup">${data[0].name[0]}</span> 
+
+    `; 
+
+      
+     var popup = document.getElementById("myPopup");
+     popup.classList.toggle("show");
+    
+    
+    $("#Coin_name").append(formatted_html);
+  } 
+
+});
+
 
     function myFunction() {
  
         var btn = document.createElement("card-group");
         document.body.appendChild(btn);
       }
-  
+    }

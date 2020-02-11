@@ -24,7 +24,7 @@
       
 
     <nav>
-      <button id="addCards" onclick="myFunction()">Click to have another Coin</button>
+      <!-- <button id="addCards" onclick="myFunction()">Click to have another Coin</button> -->
  <button type="button" class="btn">Home</button>
     <button type="button" class="btn">Live Reports</button>
     <button type="button" class="btn">About</button>
@@ -49,8 +49,8 @@
     </h5>    
       <p class="card-text">bitcoin</p>
       <div class="popup">
-       <span class="popuptext" id="myPopup">A Simple Popup!</span> 
-      <button class="btn btn-primary"   onclick="moreInfo('01coin')">More Info</button>
+       <div class="popuptext" id="myPopup">${data-toggle}</div> 
+      <button class="btn btn-primary"   onclick="moreInfo(id)">More Info</button>
       
     </div>
     </div>
